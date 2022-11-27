@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemyWalking_1.png-5af6eedbe61b701677d490ffdc1e6471.stex"
+path="res://.import/anitta.png-aa90e2412ddc995ded39afa4728f1121.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemyWalking_1.png"
-dest_files=[ "res://.import/enemyWalking_1.png-5af6eedbe61b701677d490ffdc1e6471.stex" ]
+source_file="res://images/anitta.png"
+dest_files=[ "res://.import/anitta.png-aa90e2412ddc995ded39afa4728f1121.stex" ]
 
 [params]
 

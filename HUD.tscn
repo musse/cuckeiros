@@ -31,7 +31,7 @@ margin_top = -79.5
 margin_bottom = 79.5
 rect_scale = Vector2( 0.9939, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Dodge the Creeps!"
+text = "Catch them!"
 align = 1
 autowrap = true
 

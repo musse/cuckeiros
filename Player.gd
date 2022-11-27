@@ -1,6 +1,24 @@
 extends Area2D
 
 signal hit
+signal kiss
+
+enum PLAYER_TYPE {LO, CADU, BOB}
+var PLAYER_TYPES = PLAYER_TYPE.values()
+
+var TEXTURE_PER_PLAYER_TYPE = {
+	PLAYER_TYPE.LO: load("res://images/lo.png"),
+	PLAYER_TYPE.CADU: load("res://images/cadu.png"),
+	PLAYER_TYPE.BOB: load("res://images/bob.png")
+}
+
+var OK_MOB_TYPES_PER_PLAYER_TYPE = {
+	PLAYER_TYPE.LO: [Mob.MOB_TYPE.F],
+	PLAYER_TYPE.CADU: [Mob.MOB_TYPE.F, Mob.MOB_TYPE.M],
+	PLAYER_TYPE.BOB: [Mob.MOB_TYPE.F, Mob.MOB_TYPE.T],
+}
+
+var player_type
 
 # How fast the player will move (pixels/sec)
 export var speed = 400
@@ -11,6 +29,7 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	# AnimatedSprite.Image.texture = load("res://images/lo.png")
 	hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,16 +64,25 @@ func _process(delta):
 		$AnimatedSprite.flip_v = false
 		$AnimatedSprite.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		$AnimatedSprite.animation = "up"
-		$AnimatedSprite.flip_v = velocity.y > 0
+		pass
+		#$AnimatedSprite.animation = "up"
+		#$AnimatedSprite.flip_v = velocity.y > 0
 
 
-func _on_Player_body_entered(body):
-	hide()
-	emit_signal("hit")
-	$CollisionShape2D.set_deferred("disable", true)
-	
+func _on_Player_body_entered(mob):
+	var ok_mob_types = OK_MOB_TYPES_PER_PLAYER_TYPE[player_type]
+	if mob.mob_type in ok_mob_types:
+		emit_signal("kiss")
+		mob.queue_free()
+	else: 
+		hide()
+		emit_signal("hit")
+		$CollisionShape2D.set_deferred("disable", true)
+
+
 func start(pos):
 	position = pos
+	player_type = PLAYER_TYPES[randi() % PLAYER_TYPES.size()]
+	get_node("AnimatedSprite/Image").texture = TEXTURE_PER_PLAYER_TYPE[player_type]
 	show()
 	$CollisionShape2D.disabled = false
