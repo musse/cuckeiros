@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Mob",
 "language": "GDScript",
-"path": "res://Mob.gd"
+"path": "res://mob.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Cuckeiros"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://main.tscn"
 config/icon="res://images/cucko.png"
 
 [display]
